@@ -1,0 +1,60 @@
+<?php 
+
+
+/**
+ * Implements hook_enable().
+ */
+function courses_ui_enable(){
+
+	/* If there's no vocabulary for Departments for Courses, create it. */
+	if (!taxonomy_vocabulary_machine_name_load('course_code')){
+ 		$vocabulary = (object) array(
+    		'name' => t('Course Code'),
+    		'description' => t('This vocabulary is only for Course Management module'),
+    		'machine_name' => 'course_code',    	
+ 			'hierarchy' => 1,
+     		'module' => 'courses_ui', 
+  		);
+	
+    	taxonomy_vocabulary_save($vocabulary);
+	}
+	
+	/* If there's no vocabulary for Level, create it. */
+	if (!taxonomy_vocabulary_machine_name_load('level')){
+ 		$voca_level = (object) array(
+    		'name' => t('Level'),
+    		'description' => t('Graduate or Undergraduate course'),
+    		'machine_name' => 'level',    	
+ 			'hierarchy' => 1,     		 
+  		);
+	
+    	taxonomy_vocabulary_save($voca_level);
+	}
+	
+	/* If there's no vocabulary for Terms, create it. */
+	if (!taxonomy_vocabulary_machine_name_load('term')){
+ 		$voca_term = (object) array(
+    		'name' => t('Term'),
+    		'description' => t('Semester for courses'),
+    		'machine_name' => 'term',    	
+ 			'hierarchy' => 1,     		 
+  		);
+	
+    	taxonomy_vocabulary_save($voca_term);
+	}
+		
+}
+
+/**
+* Implements hook_uninstall().
+*/
+function courses_ui_uninstall() {
+  	$vocab = taxonomy_vocabulary_machine_name_load('departments_for_courses');
+  	if ($vocab) {taxonomy_vocabulary_delete($vocab->vid);}
+  
+  	$vocab = taxonomy_vocabulary_machine_name_load('level');
+	if ($vocab) {taxonomy_vocabulary_delete($vocab->vid);}
+  
+  	$vocab = taxonomy_vocabulary_machine_name_load('term');
+	if ($vocab) {taxonomy_vocabulary_delete($vocab->vid);}
+}

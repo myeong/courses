@@ -1,0 +1,369 @@
+<?php 
+
+/**
+ * Implement of hook_menu().
+ */
+function courses_ui_menu() {
+
+	$items['admin/config/course/import'] = array(    	
+    	'title' => 'Import Courses',
+    	'page callback' => 'drupal_get_form',
+		'page arguments' => array('courses_ui_form'),
+		'description' => 'Import the course catalogs from UMD Testudo',
+    	'access arguments' => array('administer course'),    	
+    );
+
+    $items['admin/config/course'] = array(    	
+    	'title' => 'Course Management',
+    	'page callback' => 'system_admin_menu_block_page',
+    	'description' => 'Courses list management',
+    	'access arguments' => array('administer course'),
+    	'type' => MENU_NORMAL_ITEM,
+    	'file' => 'system.admin.inc',
+    	'file path' => drupal_get_path('module', 'system'),
+    );
+    
+    return $items;
+}
+
+/*
+ * Implements hook_form().
+ */
+function courses_ui_form($node, &$form_state) {
+		
+	$terms = get_terms();	
+	$depts = get_arhu_departments();
+  	
+  	if (isset($depts)){
+  	  	$form['submit'] = array(
+  			'#type' => 'submit',
+  			'#value' => t('Import'),  		
+   	 		'#description' => t('Import Courses from Testudo'),
+  	  		'#required' => TRUE,
+  	  		'#weight' => 1,
+  		);
+  		
+  		$form['term'] = array(
+    		'#type' => 'select',
+   			'#title' => t('Select a term'),
+    		'#options' => drupal_map_assoc($terms),
+    		'#description' => t('Select a term that you want to import.'),
+    		'#required' => TRUE,
+  			'#size' => 8,
+  			'#weight' => -1,
+  		);
+  	
+	  	$form['department'] = array(
+	    	'#type' => 'select',
+ 	  		'#title' => t('Select a department'),
+  	  		'#options' => drupal_map_assoc($depts),
+ 	   		'#description' => t('Select a department that you want to import.'),
+    		'#required' => TRUE,
+  			'#size' => 12,
+  			'#weight' => 0,
+  		);
+  		$form['guide'] = array(
+			'#markup' => '<p>Select term(s) and department, and click "Import" button to import course data from Testudo.</p>',
+  	 		'#weight' => -3,
+		);
+  	} else {
+  		$form['taxonomy_needed'] = array(
+			'#markup' => '<p>In order to use Course Management, you need taxonomy terms under "Course Code" vocabulary. Create the terms.</p>',
+  	 		'#weight' => 0,
+		);
+  	}  	
+	
+	// for showing results. Not used for now.
+	if(!empty($form_state['results_table'])) {
+        $form['results_table'] = array(
+            '#markup' => $form_state['results_table'],
+        	'#weight' => 3, 
+        );
+    }
+	
+  	return $form;
+}
+
+function courses_ui_form_submit($form, &$form_state) {
+	  
+  $options = array();
+  
+  $options['term'] = get_num_term($form_state['values']['term']);
+  
+  if($form_state['values']['department'] != "ALL"){  
+  	$options['department'] = array($form_state['values']['department']);
+  	
+  	/* Courses Migration */
+  	$migration = Migration::getInstance("courses");
+  	$migration->processImport($options);
+  
+  	/* Sections Migration */
+  	$migration2 = Migration::getInstance("sections");
+  	$migration2->processImport();
+  } else {  	
+    $all_depts = array_diff(get_arhu_departments(), array("ALL"));
+    drupal_set_message($message = "You selected ALL departments: " . implode(" ",$all_depts), 
+    							$type = 'status');
+        
+    $options['department'] = $all_depts;         
+    							
+   	/* Courses Migration */
+    $migration = Migration::getInstance("courses");    
+	$migration->processImport($options);
+	
+    /* Sections Migration */  		
+  	$migration2 = Migration::getInstance("sections");  	
+	$migration2->processImport(); 
+  }
+ 
+//  $form_state['results_table'] = "<p>" . $options['term'] ."</p>" . "<p>" . $options['department'] ."</p>";  
+//  $form_state['rebuild'] = TRUE;
+  
+}
+
+function get_terms(){
+/* Testudo terms are 12 (Winter), 1 (Spring), 5 (Summer), and 8 (Fall) */
+	$year = format_date(time(), 'custom', 'Y');
+	$month = format_date(time(), 'custom', 'm');
+	$terms = array();
+	
+	$firstyear = '2012';
+	$past = (string)((int)$year - 1);
+	$next = (string)((int)$year + 1);
+	
+	/* For the future  */
+	if ((int)$month > 7 ){
+		array_push($terms, $next.' Spring');		
+		array_push($terms, $next.' Winter');
+	}
+	
+	/* This year */
+	array_push($terms, $year.' Fall');	
+	array_push($terms, $year.' Summer');
+	array_push($terms, $year.' Spring');
+	
+	/* From 2013 to this year */
+	for ($i=(int)$firstyear+1; $i<(int)$year; $i++){
+		array_push($terms, (string)($i+1).' Winter');
+		array_push($terms, (string)$i.' Fall');
+		array_push($terms, (string)$i.' Summer');
+		array_push($terms, (string)$i.' Spring');		
+	}
+			
+	/* For 2012 */
+	array_push($terms, (string)($firstyear+1).' Winter');
+	array_push($terms, (string)$firstyear.' Fall');
+			
+	return $terms;
+}
+
+function get_num_term($term){	
+	$year = strtok($term, " ");
+	$month = strtok(" ");
+	if ($month == "Spring"){
+		return $year . "01";
+	} else if ($month == "Summer"){
+		return $year . "05";
+	} else if ($month == "Fall"){
+		return $year . "08";
+	} else if ($month == "Winter"){
+		return (string)((int)$year - 1) . "12";
+	} else {
+		return FALSE;
+	}			
+}
+
+function get_arhu_departments(){
+	$voca = array();	
+	$vocabularies = taxonomy_vocabulary_get_names();
+	
+	/* Getting taxonomy terms from the vocabulary. */
+    if (isset($vocabularies["course_code"])) {
+      $voca = taxonomy_get_tree($vocabularies["course_code"]->vid);
+    } else {
+      return NULL;
+    }
+    
+	$depts = array();
+	
+	/* If there's no taxonomy terms under departments_for_courses vocabulary, return Null.*/
+	if (!empty($voca)){	
+		foreach ($voca as $term){
+			array_push($depts, $term->name); 
+		}
+	} else {
+		return NULL;
+	}
+	
+	/* If there are more than 1 department in the array, create a term "ALL" to import all depts at once.*/
+	if (count($depts) > 1){
+		array_push($depts, "ALL");
+	}
+	sort($depts);
+	
+	return $depts;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function courses_ui_permission() {
+  return array(
+    'administer course' => array(
+      'title' => t('Administer course'),
+      'description' => t('Import courses'),
+    ),
+  );
+}
+
+
+/**
+ *  Run this migration every time cron is run.
+ *  This is a feature in case users do not want to trigger Courses Import.
+ *  Cron job need to be set up separately, since Courses importing time is long.
+ */
+/*
+ * Implements hook_cron().
+*/
+function courses_ui_cron(){
+	$queue = DrupalQueue::get('import_courses');
+	$queue->createItem('courses');	
+}
+
+/*
+ * Implements hook_cron_queue_info().
+*/
+function courses_ui_cron_queue_info(){
+	$queues['import_courses'] = array(
+			'worker callback' => '_courses_ui_first_import',
+			'time' => 120,
+	);
+
+	return $queues;
+}
+
+/* Cron job for the first migration. Run only once per semester, 2 months before starting a semester. */ 
+function _courses_ui_first_import($machine_name){		
+	$month_now = format_date(time(), 'custom', 'm');
+	$day_now = format_date(time(), 'custom', 'd');	
+	
+	/*Runs every 10th day of specific months */
+	if (($month_now == '11' || $month_now == '03' || $month_now == '06' || $month_now == '10') && 
+	   ($day_now == '10')) 
+	{		
+		$options['term'] = get_new_term($month_now);				
+		if (!isset($options['term'])){
+			return FALSE;
+		}
+	} else {
+		return FALSE;
+	}
+	
+	$all_depts = array_diff(get_arhu_departments(), array("ALL"));	
+	$options['department'] = $all_depts;
+		
+	/* Courses Migration */
+	$migration = Migration::getInstance("courses");
+	$migration->processImport($options);
+	
+	/* Sections Migration */
+	$migration2 = Migration::getInstance("sections");
+	$migration2->processImport();
+}
+
+/* Check if this month is an appropriate day to import next semester */
+function get_new_term($month){
+	/* Current year and month */	
+	$year_now = format_date(time(), 'custom', 'Y');
+	$month_now = (int) $month + 2 > 12 ? str_pad((string)((int)$month - 10), 2, '0', STR_PAD_LEFT) 
+										: str_pad((string)((int)$month + 2), 2, '0', STR_PAD_LEFT);
+	
+	$current_term = $year_now . $month_now;	
+	$vocabularies = taxonomy_vocabulary_get_names();
+	
+	if (isset($vocabularies["term"])) {
+		$voca = taxonomy_get_tree($vocabularies["term"]->vid);		
+	} else {
+		return NULL;
+	}
+	
+	$terms = array();	
+	
+	if (!empty($voca)){
+		foreach ($voca as $term){
+			array_push($terms, get_num_reverse_term((string)$term->name));
+		}
+	} else {
+		return NULL;
+	}
+	asort($terms);
+	
+	if ((int)$terms[0] < (int)$current_term){
+		return (string) $current_term;
+	} else {
+		return NULL;
+	}
+		
+}
+
+/*
+ * Not used for now. Reserved for future usage.
+ * */
+function get_acronym($dept){	
+	if ($dept == "American studies"){
+		return "AASP";	} 
+	else if ($dept == "Arts and Humanities"){
+		return "ARHU";	}	
+	else if ($dept == "Art History and Archaeology"){
+		return "ARTH";	} 
+	else if ($dept == "Art (Studio Art)"){
+		return "ARTT";	}		 	
+	else if ($dept == "Chinese"){
+		return "CHIN";	}
+	else if ($dept == "Classics"){
+		return "CLAS";	}		
+	else if ($dept == "Communication"){
+		return "COMM";	}		
+	else if ($dept == "Comparative Literature"){
+		return "CMLT";		} 
+	else if ($dept == "Dance"){
+		return "DANC";		} 
+	else if ($dept == "English"){
+		return "ENGL";		} 
+	else if ($dept == "Film Studies"){
+		return "FILM";		} 
+	else if ($dept == "French"){
+		return "FREN";		} 
+	else if ($dept == "Germanic Studies"){
+		return "GERM";		} 
+	else if ($dept == "History"){
+		return "HIST";		} 
+	else if ($dept == "Italian"){
+		return "ITAL";		} 
+	else if ($dept == "Japanese"){
+		return "JAPN";		} 
+	else if ($dept == "Jewish Studies"){
+		return "JWST";		} 
+	else if ($dept == "Linguistics"){
+		return "LING";		} 
+	else if ($dept == "Music"){
+		return "MUSC";		} 
+	else if ($dept == "Persian"){
+		return "PERS";		} 
+	else if ($dept == "Philosophy"){
+		return "PHIL";		} 
+	else if ($dept == "Russian"){
+		return "RUSS";		} 
+	else if ($dept == "Second Language Acquisition"){
+		return "SLAA";		} 
+	else if ($dept == "SLLC"){
+		return "SLLC";		} 
+	else if ($dept == "Spanish"){	
+		return "SPAN";		} 
+	else if ($dept == "Theatre, Dance, and Performance"){
+		return "TDPS";		} 
+	else if ($dept == "Women Studies"){
+		return "WMST";  	
+	}	
+	
+}

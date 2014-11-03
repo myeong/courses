@@ -1,0 +1,10 @@
+name = "Courses UI"
+description = "This is a module for providing UI to migrate courses."
+core = 7.x
+dependencies[] = migrate_courses
+dependencies[] = taxonomy
+
+files[] = courses_ui.module
+files[] = courses_ui.install
+
+

@@ -1,0 +1,14 @@
+name = "Migrate UMD Courses"
+description = "Migration of courses FROM a JSON file."
+package = "ARHU Custom Module"
+core = 7.x
+dependencies[] = migrate
+dependencies[] = field_collection
+
+files[] = migrate_courses.migrate.inc
+files[] = migrate_courses.module
+files[] = migrations/courses.inc
+files[] = migrations/sections.inc
+
+
+

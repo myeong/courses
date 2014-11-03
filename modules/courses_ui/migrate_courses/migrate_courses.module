@@ -1,0 +1,98 @@
+<?php
+// Run this migration every time cron is run
+/*
+ * Implements hook_cron().
+ */
+function migrate_courses_cron(){
+	$queue = DrupalQueue::get('regular_import_courses');
+	$queue->createItem('courses');	
+}
+ 
+/*
+ * Implements hook_cron_queue_info().
+ * In MigrateCourse module, this function has been moved to Courses_UI module, so disabled here.
+ */
+
+function migrate_courses_cron_queue_info(){
+  $queues['regular_import_courses'] = array(
+    'worker callback' => '_migrate_courses_execute',
+    'time' => 120,
+  );
+
+  return $queues;
+}
+
+function _migrate_courses_execute($machine_name){
+  
+	$options = array();
+	$options['term'] = get_recent_term();	// Cron job is only for the most recent semester.
+	if(!isset($options['term'])) return false;
+	
+	$all_depts = array_diff(get_arhu_departments(), array("ALL"));
+	
+	$options['department'] = $all_depts;
+	
+	$migration = Migration::getInstance("courses");
+// 	$migration->setSystemOfRecordDest();
+	$migration->prepareUpdate();
+	$result = $migration->processImport($options);
+	if($result == 1){
+		watchdog('migrate_courses', "Migration of courses completed");
+	} else {
+		watchdog('migrate_courses', "Migration of courses failed");
+	}
+	
+	$migration2 = Migration::getInstance("sections");
+// 	$migration2->setSystemOfRecordDest();
+	$migration2->prepareUpdate();
+	$result = $migration2->processImport();
+	if($result == 1){
+		watchdog('migrate_courses', "Migration of sections completed");
+	} else {
+		watchdog('migrate_courses', "Migration of sections failed");
+	} 
+
+}
+
+function get_recent_term(){
+	$voca = array();
+	$vocabularies = taxonomy_vocabulary_get_names();
+
+	/* Getting taxonomy terms from the vocabulary. */
+	if (isset($vocabularies["term"])) {
+		$voca = taxonomy_get_tree($vocabularies["term"]->vid);
+	} else {
+		return NULL;
+	}
+
+	$terms = array();
+
+	/* If there's no taxonomy terms under departments_for_courses vocabulary, return Null.*/
+	if (!empty($voca)){
+		foreach ($voca as $term){
+			array_push($terms, get_num_reverse_term((string)$term->name));
+		}
+	} else {
+		return NULL;
+	}
+	rsort($terms);
+	return $terms[0];
+}
+
+function get_num_reverse_term($term){
+	$month = strtok($term, " ");
+	$year = strtok(" ");
+	if ($month == "Spring"){
+		return $year . "01";
+	} else if ($month == "Summer"){
+		return $year . "05";
+	} else if ($month == "Fall"){
+		return $year . "08";
+	} else if ($month == "Winter"){
+		return (string)((int)$year - 1) . "12";
+	} else {
+		return FALSE;
+	}
+}
+
+

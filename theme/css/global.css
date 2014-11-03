@@ -1,0 +1,104 @@
+/* Courses Page */
+.course-title{
+	float: left;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 0 5px 7px 0;	
+}
+.node-type-course .field-name-field-title div.field-item{
+	font-size: 15px;
+    font-weight: bold;
+    margin: 5px 0 7px 0;
+}
+.node-type-course .field-name-field-section-id{
+    float: left;	
+    margin-right: 5px;
+}
+.node-type-course .field-name-field-teacher{
+	float: left;
+	margin-right: 5px;
+}
+.node-type-course .field-collection-container{
+    border-bottom: 0;	   
+}
+.node-type-course .field-collection-container .field-items .field-item{
+	margin-bottom: 0px;
+}
+.node-type-course .field-collection-view {
+	margin-left: 12px;
+	margin-top: 2px;
+	padding:0;
+	border: none;
+}
+.node-type-course .field-name-field-description div.field-item,
+.node-type-course .field-name-field-extra-description div.field-item,
+.node-type-course .field-name-field-course-details div.field-item{
+	margin: 5px 0 15px 12px;
+}
+/* Syllabus styling in Course page*/
+.node-type-course .field-name-field-user-id a,
+.node-type-course .field-name-field-user-id-manual a{
+	font-size: 11px;
+	color: #FFF;
+	background-color: #9F454B;
+	padding: 1px 2px 1px 2px;
+	border-radius: 3px;
+}
+.node-type-course .field-name-field-user-id a:hover,
+.node-type-course .field-name-field-user-id-manual a:hover{
+	font-size: 11px;
+	color: #87171e;
+	background-color: transparent;
+	padding: 1px 2px 1px 2px;	
+	text-decoration: none;
+}
+/* Courses View */
+.view-courses ul,
+.view-courses ul li {
+	margin: 0;
+}
+.view-courses table {
+	border-left: 0;
+	border-right: 0;	
+	width: 670px;
+	margin-top: 25px;
+}
+.view-courses tr.even,
+.view-courses tr.odd,
+.view-courses tr td:active,
+.view-courses tr.even td,
+.view-courses tr.odd td {
+	background-color: transparent;
+	vertical-align: top;	
+	border-left: 0;
+	border-right: 0; 
+}
+.view-courses thead th{
+	height: 33px;
+	background-color: transparent;
+	font-weight: bold;
+	border-left: 0;
+    border-right: 0; 
+    white-space: nowrap;
+}
+.view-courses tr.even:hover td,
+.view-courses tr.odd:hover td{
+	background: transparent;
+}
+.view-courses a{
+	font-weight: bold;
+}
+#testudo-icon{
+	float: right;
+	font-size: 10px;
+	text-align: right;
+	margin-right: -140px;
+}
+.view-courses .views-field-field-sections-1{
+	min-width: 89px;	
+	max-width: 95px;
+}
+.view-courses tr td.views-field-field-sections,
+.view-courses tr td.views-field-field-term{
+	white-space:nowrap;
+}
