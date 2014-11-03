@@ -5,8 +5,10 @@ Created by Myeong Lee (University of Maryland)
 
 ### Introduction
 Course Management module, a custom Drupal module, was developed for UMD websites (that were developed with Drupal). The motivation was from university members’ demands for presenting up-to-date courses in their department websites. So, I developed the module as a developer (GA) at ARHU Web and Application Services. The module basically crawls Testudo websites’ courses data and migrates them into Drupal database (as a Content Type called “Course”). This module can help administrators and users have up-to-data courses information which is automatically imported from the UMD Testudo site. 
+
 Specifically, this module consists of 3 components: Python scripts, Drupal Migrate classes, and a custom Drupal module called “Courses UI.” The Python scripts were originally developed by a student from Computer Science department, but was old and not compatible with Drupal website. I modified and wrote some more codes, so that it can crawl the current version of Testudo site and provide Drupal-compatible formats of courses data. Then, the Migrate module was created to import the courses data into Drupal database system. Courses UI module provides a UI for administrators to import Courses manually, and basically used at the stage of setting up the courses pages. These 3 components are essential in importing courses data to Drupal system. Beside this module, in order for the data to be shown in an actual website, there should be some more configurations in the View, Content Type, and Template files.
 Distributed File Structure
+
 In the repository, there are 3 folders: features, modules, and theme.
 
 - "modules" folder contains "courses ui" module, which is a core part of this project. Explained in the next section.
