@@ -204,12 +204,6 @@ function course_management_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'The Classics department offers courses with three different prefixes.  Course numbers with the CLAS prefix are taught in English; those with the GREK prefix are language courses in either ancient or modern Greek; and those with the LATN prefix are language courses in Latin.  The course listings will be updated each semester. For more detailed descriptions of the courses, follow the link for the course brochure.';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Course Code */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -276,6 +270,10 @@ function course_management_views_default_views() {
   $handler->display->display_options['filters']['tid_2']['id'] = 'tid_2';
   $handler->display->display_options['filters']['tid_2']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid_2']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid_2']['value'] = array(
+    602 => '602',
+    604 => '604',
+  );
   $handler->display->display_options['filters']['tid_2']['group'] = 1;
   $handler->display->display_options['filters']['tid_2']['exposed'] = TRUE;
   $handler->display->display_options['filters']['tid_2']['expose']['operator_id'] = 'tid_2_op';
@@ -288,6 +286,7 @@ function course_management_views_default_views() {
     1 => '1',
     3 => 0,
     4 => 0,
+    7 => 0,
     5 => 0,
     6 => 0,
   );
