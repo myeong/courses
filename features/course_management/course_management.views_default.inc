@@ -203,13 +203,20 @@ function course_management_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = 'The Classics department offers courses with three different prefixes.  Course numbers with the CLAS prefix are taught in English; those with the GREK prefix are language courses in either ancient or modern Greek; and those with the LATN prefix are language courses in Latin.  The course listings will be updated each semester. For more detailed descriptions of the courses, follow the link for the course brochure.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Course Code */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['ui_name'] = 'Course Code';
-  $handler->display->display_options['fields']['title']['label'] = 'Course Code';
+  $handler->display->display_options['fields']['title']['label'] = 'Course';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
@@ -240,7 +247,7 @@ function course_management_views_default_views() {
   $handler->display->display_options['fields']['field_sections_1']['id'] = 'field_sections_1';
   $handler->display->display_options['fields']['field_sections_1']['table'] = 'field_data_field_sections';
   $handler->display->display_options['fields']['field_sections_1']['field'] = 'field_sections';
-  $handler->display->display_options['fields']['field_sections_1']['label'] = 'Instructor';
+  $handler->display->display_options['fields']['field_sections_1']['label'] = 'Instructor(s)';
   $handler->display->display_options['fields']['field_sections_1']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_sections_1']['settings'] = array(
     'view_mode' => 'token',
@@ -269,9 +276,6 @@ function course_management_views_default_views() {
   $handler->display->display_options['filters']['tid_2']['id'] = 'tid_2';
   $handler->display->display_options['filters']['tid_2']['table'] = 'taxonomy_index';
   $handler->display->display_options['filters']['tid_2']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid_2']['value'] = array(
-    600 => '600',
-  );
   $handler->display->display_options['filters']['tid_2']['group'] = 1;
   $handler->display->display_options['filters']['tid_2']['exposed'] = TRUE;
   $handler->display->display_options['filters']['tid_2']['expose']['operator_id'] = 'tid_2_op';

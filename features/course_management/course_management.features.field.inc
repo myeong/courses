@@ -19,7 +19,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_section_id',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -104,7 +104,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_teacher',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -214,7 +214,10 @@ function course_management_field_default_fields() {
           3 => 0,
           4 => 0,
           5 => 0,
-          6 => 0,
+          7 => 0,
+          8 => 0,
+          9 => 0,
+          10 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -273,7 +276,9 @@ function course_management_field_default_fields() {
       'widget' => array(
         'active' => 1,
         'module' => 'options',
-        'settings' => array(),
+        'settings' => array(
+          'apply_chosen' => '',
+        ),
         'type' => 'options_select',
         'weight' => '3',
       ),
@@ -289,7 +294,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_user_id_manual',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'uid' => array(
@@ -315,6 +320,7 @@ function course_management_field_default_fields() {
           7 => 0,
           8 => 0,
           9 => 0,
+          10 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -391,7 +397,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_course_details',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -468,7 +474,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_credits',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -547,7 +553,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_department',
       'field_permissions' => array(
-        'type' => '2',
+        'type' => '0',
       ),
       'foreign keys' => array(
         'tid' => array(
@@ -782,7 +788,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_grade_method',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -861,7 +867,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_level',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'tid' => array(
@@ -943,7 +949,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_permission_required',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(),
       'indexes' => array(
@@ -1022,7 +1028,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_sections',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(),
       'indexes' => array(),
@@ -1100,7 +1106,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_syllabus_file',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'fid' => array(
@@ -1176,7 +1182,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_term',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'tid' => array(
@@ -1240,7 +1246,7 @@ function course_management_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
+        'active' => 0,
         'module' => 'taxonomy',
         'settings' => array(
           'autocomplete_path' => 'taxonomy/autocomplete',
@@ -1261,7 +1267,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_title',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -1530,7 +1536,7 @@ function course_management_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_syllabus_file',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'fid' => array(
