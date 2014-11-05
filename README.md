@@ -47,5 +47,5 @@ In the repository, there are 3 folders: features, modules, and theme.
 			- testudo.pyc
 
 ### JSON file
-Stored at "files/courses/[site_name]/" directory in Drupal.
+Stored at "files/courses/" directory in Drupal.
 Supports multi-site configurations: each multisite can has its own JSON file, while the courses module is shared by all the site.
