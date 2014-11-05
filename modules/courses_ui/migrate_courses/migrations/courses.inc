@@ -24,9 +24,9 @@ class CoursesMigration extends Migration {
 		//'sections' => t('Sections'),
     );
         
-//     $current_site = array();
-//     $current_site = explode("/", conf_path());
-//     $current_site = explode(".", $current_site[1]);
+    $current_site = array();
+    $current_site = explode("/", conf_path());
+    $current_site = explode(".", $current_site[1]);
         
     $this->course_data_path = drupal_realpath(file_default_scheme() . '://') . 
     						  "/courses";
