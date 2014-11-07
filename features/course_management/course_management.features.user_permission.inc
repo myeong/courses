@@ -10,6 +10,28 @@
 function course_management_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access administration menu.
+  $permissions['access administration menu'] = array(
+    'name' => 'access administration menu',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'course admin',
+      2 => 'hist admin',
+      3 => 'hist editor',
+    ),
+    'module' => 'admin_menu',
+  );
+
+  // Exported permission: administer course.
+  $permissions['administer course'] = array(
+    'name' => 'administer course',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'course admin',
+    ),
+    'module' => 'courses_ui',
+  );
+
   // Exported permission: administer field collections.
   $permissions['administer field collections'] = array(
     'name' => 'administer field collections',
@@ -19,12 +41,22 @@ function course_management_user_default_permissions() {
     'module' => 'field_collection',
   );
 
+  // Exported permission: administer taxonomy.
+  $permissions['administer taxonomy'] = array(
+    'name' => 'administer taxonomy',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'course admin',
+      2 => 'hist admin',
+      3 => 'hist editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: create course content.
   $permissions['create course content'] = array(
     'name' => 'create course content',
-    'roles' => array(
-      0 => 'course admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -43,7 +75,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_credits',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -53,7 +84,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_description',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -63,7 +93,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_grade_method',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -73,7 +102,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_level',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -83,7 +111,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_permission_required',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -93,7 +120,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_section_id',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -103,7 +129,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_sections',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -123,7 +148,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_teacher',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -133,7 +157,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_term',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -162,7 +185,6 @@ function course_management_user_default_permissions() {
     'name' => 'create field_user_id_manual',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -181,6 +203,33 @@ function course_management_user_default_permissions() {
       0 => 'course admin',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: delete terms in 15.
+  $permissions['delete terms in 15'] = array(
+    'name' => 'delete terms in 15',
+    'roles' => array(
+      0 => 'course admin',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: delete terms in 16.
+  $permissions['delete terms in 16'] = array(
+    'name' => 'delete terms in 16',
+    'roles' => array(
+      0 => 'course admin',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: delete terms in 17.
+  $permissions['delete terms in 17'] = array(
+    'name' => 'delete terms in 17',
+    'roles' => array(
+      0 => 'course admin',
+    ),
+    'module' => 'taxonomy',
   );
 
   // Exported permission: edit any course content.
@@ -252,6 +301,7 @@ function course_management_user_default_permissions() {
     'name' => 'edit field_section_id',
     'roles' => array(
       0 => 'administrator',
+      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -261,6 +311,7 @@ function course_management_user_default_permissions() {
     'name' => 'edit field_sections',
     'roles' => array(
       0 => 'administrator',
+      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -270,6 +321,7 @@ function course_management_user_default_permissions() {
     'name' => 'edit field_syllabus_file',
     'roles' => array(
       0 => 'administrator',
+      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -315,6 +367,7 @@ function course_management_user_default_permissions() {
     'name' => 'edit field_user_id_manual',
     'roles' => array(
       0 => 'administrator',
+      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -334,7 +387,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_course_details',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -344,7 +396,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_credits',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -354,7 +405,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_description',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -364,7 +414,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_grade_method',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -374,7 +423,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_level',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -384,7 +432,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_permission_required',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -424,7 +471,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_teacher',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -434,7 +480,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_term',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -444,7 +489,6 @@ function course_management_user_default_permissions() {
     'name' => 'edit own field_title',
     'roles' => array(
       0 => 'administrator',
-      1 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -466,6 +510,33 @@ function course_management_user_default_permissions() {
       1 => 'course admin',
     ),
     'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit terms in 15.
+  $permissions['edit terms in 15'] = array(
+    'name' => 'edit terms in 15',
+    'roles' => array(
+      0 => 'course admin',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: edit terms in 16.
+  $permissions['edit terms in 16'] = array(
+    'name' => 'edit terms in 16',
+    'roles' => array(
+      0 => 'course admin',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: edit terms in 17.
+  $permissions['edit terms in 17'] = array(
+    'name' => 'edit terms in 17',
+    'roles' => array(
+      0 => 'course admin',
+    ),
+    'module' => 'taxonomy',
   );
 
   // Exported permission: publish any course content.
@@ -595,6 +666,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -606,6 +678,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -617,6 +690,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -650,6 +724,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -672,6 +747,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -749,6 +825,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -760,6 +837,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -771,6 +849,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -804,6 +883,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
@@ -826,6 +906,7 @@ function course_management_user_default_permissions() {
       0 => 'administrator',
       1 => 'anonymous user',
       2 => 'authenticated user',
+      3 => 'course admin',
     ),
     'module' => 'field_permissions',
   );
