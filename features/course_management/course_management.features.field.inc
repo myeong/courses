@@ -46,7 +46,7 @@ function course_management_field_default_fields() {
       'bundle' => 'field_sections',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Section ID for each course. This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -90,7 +90,7 @@ function course_management_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '0',
+        'weight' => 0,
       ),
     ),
   );
@@ -131,7 +131,7 @@ function course_management_field_default_fields() {
       'bundle' => 'field_sections',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -214,10 +214,8 @@ function course_management_field_default_fields() {
           3 => 0,
           4 => 0,
           5 => 0,
+          6 => 0,
           7 => 0,
-          8 => 0,
-          9 => 0,
-          10 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -236,7 +234,7 @@ function course_management_field_default_fields() {
       'bundle' => 'field_sections',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'User ID that is automatically matched by the migrate module. This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -276,9 +274,7 @@ function course_management_field_default_fields() {
       'widget' => array(
         'active' => 1,
         'module' => 'options',
-        'settings' => array(
-          'apply_chosen' => '',
-        ),
+        'settings' => array(),
         'type' => 'options_select',
         'weight' => '3',
       ),
@@ -317,10 +313,8 @@ function course_management_field_default_fields() {
           3 => 0,
           4 => 0,
           5 => 0,
+          6 => 0,
           7 => 0,
-          8 => 0,
-          9 => 0,
-          10 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -339,7 +333,7 @@ function course_management_field_default_fields() {
       'bundle' => 'field_sections',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is for manually setting a user reference for the section\'s instructor. Admin users can edit this field to manually set a Drupal user to the instructor.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -379,9 +373,7 @@ function course_management_field_default_fields() {
       'widget' => array(
         'active' => 1,
         'module' => 'options',
-        'settings' => array(
-          'apply_chosen' => '',
-        ),
+        'settings' => array(),
         'type' => 'options_select',
         'weight' => '2',
       ),
@@ -422,7 +414,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. This is normally blank, but sometimes there is a content from Testudo for this field. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -501,7 +493,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -584,13 +576,9 @@ function course_management_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'course',
-      'default_value' => array(
-        0 => array(
-          'tid' => '453',
-        ),
-      ),
+      'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -623,9 +611,7 @@ function course_management_field_default_fields() {
       'widget' => array(
         'active' => 1,
         'module' => 'options',
-        'settings' => array(
-          'apply_chosen' => '',
-        ),
+        'settings' => array(),
         'type' => 'options_select',
         'weight' => '11',
       ),
@@ -666,7 +652,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -743,7 +729,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is for manually describing the course, and not controlled by automatic migration. Admin users can edit this field if needed.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -815,7 +801,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -900,7 +886,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Graduate or Undergraduate course',
+      'description' => 'Graduate or Undergraduate course. This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -977,7 +963,7 @@ function course_management_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -1134,7 +1120,7 @@ function course_management_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'course',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is for uploading a syllabus file for the course. Admin user can manually upload a file.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1215,7 +1201,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Semester. This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -1294,7 +1280,7 @@ function course_management_field_default_fields() {
       'bundle' => 'course',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated from Testudo. Do NOT edit this field.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -1619,18 +1605,26 @@ function course_management_field_default_fields() {
   t('Description');
   t('Extra Description');
   t('Grade Method');
-  t('Graduate or Undergraduate course');
+  t('Graduate or Undergraduate course. This field is updated from Testudo. Do NOT edit this field.');
   t('Instructor');
   t('Level');
   t('Permission Required');
   t('Section ID');
+  t('Section ID for each course. This field is updated from Testudo. Do NOT edit this field.');
   t('Sections');
+  t('Semester. This field is updated from Testudo. Do NOT edit this field.');
   t('Syllabus');
   t('Syllabus File');
   t('Term');
+  t('This field is for manually describing the course, and not controlled by automatic migration. Admin users can edit this field if needed.');
+  t('This field is for manually setting a user reference for the section\'s instructor. Admin users can edit this field to manually set a Drupal user to the instructor.');
+  t('This field is for uploading a syllabus file for the course. Admin user can manually upload a file.');
+  t('This field is updated from Testudo. Do NOT edit this field.');
+  t('This field is updated from Testudo. This is normally blank, but sometimes there is a content from Testudo for this field. Do NOT edit this field.');
   t('Title');
   t('User ID');
   t('User ID Hidden');
+  t('User ID that is automatically matched by the migrate module. This field is updated from Testudo. Do NOT edit this field.');
 
   return $fields;
 }
